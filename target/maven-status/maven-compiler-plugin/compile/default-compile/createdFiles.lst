@@ -1,0 +1,3 @@
+org/glushchenko/emart/dto/Product.class
+org/glushchenko/emart/servlet/SelectCategoryServlet.class
+org/glushchenko/emart/service/ProductService.class
