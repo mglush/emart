@@ -14,5 +14,5 @@ Backend: Java.
   - openjdk 18.0.1.1.<br />
 
 Build automation tool: Maven Apache.
-  - maven-compiler version 18.
-  - tomcat7-maven-plugin version 2.2.
+  - maven-compiler 18.
+  - tomcat7-maven-plugin 2.2.
