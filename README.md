@@ -4,3 +4,13 @@
 Oracle Database implementation for an online store with separate interfaces for customers and managers.<br />
 Michael worked on the eMart database and the interfaces for customers and managers to interact with the store.<br />
 Matthew worked on the eDepot database and the interface for vendors to interact with the warehouse.
+
+Technologies:
+
+Database: Oracle.
+  - ojdbc11 version 21.5.0.0.
+Backend: Java.
+  - openjdk 18.0.1.1.
+Build automation tool: Maven Apache.
+  - maven-compiler version 18.
+  - tomcat7-maven-plugin version 2.2.
