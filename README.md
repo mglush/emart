@@ -23,7 +23,7 @@ Functionality of the manager interface includes:<br />
 
 Technologies:
   - Database: Oracle.
-    - ojdbc11 version 21.5.0.0.<br />
+    - ojdbc11 21.5.0.0.<br />
   - Backend: Java.
     - openjdk 18.0.1.1.<br />
   - Build automation tool: Maven Apache.
