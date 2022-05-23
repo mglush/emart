@@ -9,8 +9,10 @@ Technologies:
 
 Database: Oracle.
   - ojdbc11 version 21.5.0.0.<br />
+
 Backend: Java.
   - openjdk 18.0.1.1.<br />
+
 Build automation tool: Maven Apache.
   - maven-compiler version 18.
   - tomcat7-maven-plugin version 2.2.
