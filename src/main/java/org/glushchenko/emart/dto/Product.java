@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class Product {
     String id;
-    String name;
+    String modelNumber;
     String categoryName;
     BigDecimal price;
 
@@ -16,12 +16,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getModelNumber() {
+        return modelNumber;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setModelNumber(String modelNumber) {
+        this.modelNumber = modelNumber;
     }
 
     public String getCategoryName() {
@@ -44,7 +44,7 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "id='" + id + '\'' +
-                ", name='" + name + '\'' +
+                ", model number='" + modelNumber + '\'' +
                 ", categoryName='" + categoryName + '\'' +
                 ", price=" + price +
                 '}';
