@@ -14,19 +14,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(
-        name = "selectcategoryservlet",
-        urlPatterns = "/SelectCategory"
+        name = "searchproductservlet",
+        urlPatterns = "/SearchProduct"
 )
-public class SelectCategoryServlet extends HttpServlet {
+public class SearchProductServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String categoryName = request.getParameter("Name");
+        String productInfo = request.getParameter("Search");
 
         ProductService productService = new ProductService();
 
-        List<Product> products = productService.getProductsByCategory(categoryName);
+        List<Product> products = productService.getProductsByInfo(productInfo);
         List<String> productStrings = new ArrayList<>();
         for (Product product : products) {
             productStrings.add(product.toString());

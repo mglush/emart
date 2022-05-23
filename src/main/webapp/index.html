@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>eMart</title>
+<!--    <link rel="stylesheet" href="./resources/css/index.css">-->
 </head>
 <body>
 <center>
     <h1>
-        Select category
+        Select category or search for a product
     </h1>
-    <form method="post" action="SelectCategory">
-        <br>
-        <select name="Name" size="1">
+    <form class = "search" id = "search" method="post" action="SearchProduct">
+        <input type="text" class="searchInput" id="searchInput" name="Search" size="21" maxlength="100">
+        <input type="submit" value="Search" id="searchButton">
+    </form>
+    <form class = "selectCategory" id = "selectCategory" method="post" action="SelectCategory">
+        <select id = "categoryDropDown" name="Name" size="1">
             <option>Laptop</option>
             <option>Desktop</option>
             <option>Monitor</option>
@@ -19,8 +23,8 @@
             <option>Printer</option>
             <option>Camera</option>
         </select>
-        <br><br>
-        <input type="submit">
+        <br>
+        <input id = "submitButton" type="submit">
     </form>
 </center>
 </body>

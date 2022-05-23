@@ -106,9 +106,9 @@ INSERT INTO product_compatibilities (products_id, compatible_products_id) VALUES
 -- order_lines table starts out as empty.
 
 -- populating pricing_rules table.
-INSERT INTO pricing_rules (id, name, value) VALUES (1, 'new', 0.1);
-INSERT INTO pricing_rules (id, name, value) VALUES (2, 'silver', 0.05);
-INSERT INTO pricing_rules (id, name, value) VALUES (3, 'gold', 0.1);
+INSERT INTO pricing_rules (id, name, value) VALUES (1, 'new', -0.1);
+INSERT INTO pricing_rules (id, name, value) VALUES (2, 'silver', -0.05);
+INSERT INTO pricing_rules (id, name, value) VALUES (3, 'gold', -0.1);
 INSERT INTO pricing_rules (id, name, value) VALUES (4, 'shipping_and_handling', 0.1);
 INSERT INTO pricing_rules (id, name, value) VALUES (5, 'free_shipping_threshold', 100);
 INSERT INTO pricing_rules (id, name, value) VALUES (6, 'green', 0);
