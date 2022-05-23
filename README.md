@@ -12,6 +12,7 @@ Functionality of the customer interface includes:<br />
   - checking out (completing an order).
   - displaying the previous order for the customer.
   - re-running a previous order.
+
 Functionality of the manager interface includes:<br />
   - logging in with their credentials.
   - print monthly summary of sales statements.
@@ -19,6 +20,7 @@ Functionality of the manager interface includes:<br />
   - send an order to a manufacturer (who would then send the requested order to Matthew's eDepot warehouse).
   - change the price of an item.
   - delete all sales transactions that are no longer needed for computation of customer status.
+
 Technologies:
   - Database: Oracle.
     - ojdbc11 version 21.5.0.0.<br />
