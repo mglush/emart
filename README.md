@@ -17,4 +17,4 @@ Build automation tool: Maven Apache.
   - maven-compiler 18.
   - tomcat7-maven-plugin 2.2.
 
-&copy; Michael Glushchenko 2022.
+Michael Glushchenko &copy; 2022
