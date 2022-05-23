@@ -1,5 +1,8 @@
 CREATE SCHEMA AUTHORIZATION glushchenko;
 
+-- integrity constraints for varchar field lengths
+-- will be adjusted at the end of this project.
+
 CREATE TABLE customer_types(
     id VARCHAR2(256) NOT NULL,
     type VARCHAR2(256) NOT NULL,
