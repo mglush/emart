@@ -1,4 +1,4 @@
-# eMart Database
+# Online Store: eMart and eDepot.
 #### By Michael Glushchenko and Matthew Aragaw for UCSB CS174A Spring 2022.
 
 Oracle Database implementation of an online store/warehouse. Provides separate interfaces for customers and managers to interact with the eMart database, and an interface for vendors to interact with the eDepot database.<br />
