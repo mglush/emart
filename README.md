@@ -1,4 +1,4 @@
-# Online Store: eMart and eDepot.
+# Online Store: eMart.
 #### By Michael Glushchenko, partnered with Matthew Aragaw, for UCSB CS174A Spring 2022.
 
 Oracle Database implementation of an online store/warehouse. Provides separate interfaces for customers and managers to interact with the eMart database. At key points in the interactions, Matthew's eDepot database is queried for various information.<br />
