@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>eMart</title>
-<!--    <link rel="stylesheet" href="./resources/css/index.css">-->
+    <script language="JavaScript">
+        function testResults (form) {
+            var TestVar = form.category.value;
+            alert ("You selected: " + TestVar);
+        <!--CALL A FUNCTION TO FILL IN THE CATEGORY MEMBER VARIABLE OF PRODUCT SERVICE-->
+        }
+    </script>
+    <link rel="stylesheet" href="./resources/css/index.css">
 </head>
 <body>
 <center>
@@ -15,7 +22,8 @@
         <input type="submit" value="Search" id="searchButton">
     </form>
     <form class = "selectCategory" id = "selectCategory" method="post" action="SelectCategory">
-        <select id = "categoryDropDown" name="Name" size="1">
+        <select id = "categoryDropDown" name="category" size="1" onchange="testResults(this.form)">
+            <option>All</option>
             <option>Laptop</option>
             <option>Desktop</option>
             <option>Monitor</option>
@@ -23,8 +31,6 @@
             <option>Printer</option>
             <option>Camera</option>
         </select>
-        <br>
-        <input id = "submitButton" type="submit">
     </form>
 </center>
 </body>

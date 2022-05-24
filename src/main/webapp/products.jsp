@@ -1,6 +1,11 @@
 <%@ page import ="java.util.*" %>
 <!DOCTYPE html>
 <html>
+<head>
+    <meta charset="UTF-8">
+    <title>eMart</title>
+    <link rel="stylesheet" href="./resources/css/products.css">
+</head>
 <body>
 <center>
 <h1>
