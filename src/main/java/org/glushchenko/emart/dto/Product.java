@@ -6,6 +6,7 @@ public class Product {
     String id;
     String modelNumber;
     String categoryName;
+    BigDecimal warranty;
     BigDecimal price;
 
     public String getId() {
@@ -32,6 +33,14 @@ public class Product {
         this.categoryName = categoryName;
     }
 
+    public BigDecimal getWarranty() {
+        return warranty;
+    }
+
+    public void setWarranty(BigDecimal warranty) {
+        this.warranty = warranty;
+    }
+
     public BigDecimal getPrice() {
         return price;
     }
@@ -43,9 +52,10 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "id='" + id + '\'' +
+                "stock number='" + id + '\'' +
                 ", model number='" + modelNumber + '\'' +
                 ", categoryName='" + categoryName + '\'' +
+                ", warranty='" + warranty + '\'' +
                 ", price=" + price +
                 '}';
     }

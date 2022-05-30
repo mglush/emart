@@ -7,7 +7,6 @@
         function testResults (form) {
             var TestVar = form.category.value;
             alert ("You selected: " + TestVar);
-        <!--CALL A FUNCTION TO FILL IN THE CATEGORY MEMBER VARIABLE OF PRODUCT SERVICE-->
         }
     </script>
     <link rel="stylesheet" href="./resources/css/index.css">
@@ -15,14 +14,10 @@
 <body>
 <center>
     <h1>
-        Select category or search for a product
+        Search for products in a given category!
     </h1>
     <form class = "search" id = "search" method="post" action="SearchProduct">
-        <input type="text" class="searchInput" id="searchInput" name="Search" size="21" maxlength="100">
-        <input type="submit" value="Search" id="searchButton">
-    </form>
-    <form class = "selectCategory" id = "selectCategory" method="post" action="SelectCategory">
-        <select id = "categoryDropDown" name="category" size="1" onchange="testResults(this.form)">
+        <select class = "categoryDropDown" name="Category" size="1" onchange="testResults(this.form)">
             <option>All</option>
             <option>Laptop</option>
             <option>Desktop</option>
@@ -31,6 +26,8 @@
             <option>Printer</option>
             <option>Camera</option>
         </select>
+        <input type="text" class="searchInput" id="searchInput" name="Search" size="42" maxlength="100">
+        <input type="submit" data-value="Category" value="Search" id="searchButton">
     </form>
 </center>
 </body>
