@@ -5,21 +5,27 @@ Oracle Database implementation of an online store/warehouse. Provides separate i
 I worked on the eMart database, as well as the interfaces for customers and managers to interact with the store.<br />
 
 Functionality of the customer interface includes:<br />
-  - logging in with their credentials.
-  - creating an account if they have no credentials yet.
-  - searching through the product catalog by category or name.
-  - adding a variable quantity of some item to cart.
-  - checking out (completing an order).
-  - displaying the previous order for the customer.
-  - re-running a previous order.
+  - log in with credentials.
+  - create an account if user not yet a customer.
+  - search through the product catalog by category by any criteria.
+  - add products to cart (for checkout later).
+  - check out (comeplete an order with products in the cart).
+  - display the previous order for the customer.
+  - re-run a previous order for a given customer.
 
 Functionality of the manager interface includes:<br />
-  - logging in with their credentials.
+  - log in with credentials.
   - print monthly summary of sales statements.
-  - adjust customer status according to policy or personal decision.
-  - send an order to a manufacturer (who would then send the requested order to Matthew's eDepot warehouse).
-  - change the price of an item.
+  - adjust customer status (bypassing company policy).
+  - send an order to a manufacturer (bypassing company policy).
+  - change the price of an item (bypassing company policy).
   - delete all sales transactions that are no longer needed for computation of customer status.
+
+Functionality of the eMart database includes:<br />
+  - automatically recomputes customer status according to their order history.
+  - automatically sends a replenishment request to a manufacturer when there are 3 low-inventory items in the store made by that manufacturer.
+  - allows for the change of company policy regarding how much discount to give to customers of certain status.
+  - keeps data of all orders and when each item was added to cart within that order, to properly apply company policy to correct timeframes.
 
 Technologies:
   - Database: Oracle.
