@@ -21,14 +21,20 @@ public class SearchProductServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String productInfo = request.getParameter("Search");
+        String stockNumber = request.getParameter("StockNumber");
         String categoryName = request.getParameter("Category");
-        ProductService productService = new ProductService();
+        String modelNumber = request.getParameter("ModelNumber");
 
-        List<Product> products = productService.getProducts(categoryName, productInfo);
+        ProductService productService = new ProductService();
+        List<Product> products;
+        if (stockNumber != null) {
+            products = productService.getProductsByStock(categoryName, stockNumber);
+        } else {
+            products = productService.getProductsByModel(categoryName, modelNumber);
+        }
 
         if (products.isEmpty()) {
-            RequestDispatcher view = request.getRequestDispatcher("nothingFound.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("emptySearch.jsp");
             view.forward(request, response);
         }
         else {

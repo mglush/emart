@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>eMart</title>
+    <title>Empty Search</title>
     <link rel="stylesheet" href="./resources/css/products.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
     We sincerely apologize, there is nothing in store for ya.
 </h1>
 <h2>
-    Make sure you entered the correct search information or try selecting the "All" category!
+    Try going back and searching for a stock number, a category, or just select "All" to view what we have.
 </h2>
 </body>
 </html>

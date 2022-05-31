@@ -7,6 +7,7 @@ CREATE TABLE customer_types(
     id VARCHAR2(256) NOT NULL,
     type VARCHAR2(256) NOT NULL,
     CONSTRAINT customer_types_pk PRIMARY KEY (id)
+    CONSTRAINT customer_types_unique UNIQUE (type)
 );
 
 CREATE TABLE customers(
@@ -33,7 +34,7 @@ CREATE TABLE manufacturers(
     id VARCHAR2(256) NOT NULL,
     name VARCHAR2(256) NOT NULL,
     CONSTRAINT manufacturers_pk PRIMARY KEY (id),
-    CONSTRAINT msnufacturers_name_unique UNIQUE (name)
+    CONSTRAINT manufacturers_name_unique UNIQUE (name)
 );
 
 CREATE TABLE products(

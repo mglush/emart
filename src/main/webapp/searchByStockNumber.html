@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>eMart</title>
+    <script language="JavaScript">
+        function testResults (form) {
+            var TestVar = form.category.value;
+            alert ("You selected: " + TestVar);
+        }
+    </script>
+    <link rel="stylesheet" href="./resources/css/products.css">
+</head>
+<body>
+<center>
+    <h1>
+        Search for products by stock number in a given category!
+    </h1>
+    <form class = "search" id = "search" method="post" action="SearchProduct">
+        <select class = "categoryDropDown" name="Category" size="1" onchange="testResults(this.form)">
+            <option>All</option>
+            <option>Laptop</option>
+            <option>Desktop</option>
+            <option>Monitor</option>
+            <option>Software</option>
+            <option>Printer</option>
+            <option>Camera</option>
+        </select>
+        <input type="text" class="searchInput" id="searchInput" name="StockNumber" size="42" maxlength="100">
+        <input type="submit" data-value="Category" value="Search" id="searchButton">
+    </form>
+</center>
+</body>
+</html>

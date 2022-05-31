@@ -3,32 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>eMart</title>
-    <script language="JavaScript">
-        function testResults (form) {
-            var TestVar = form.category.value;
-            alert ("You selected: " + TestVar);
-        }
-    </script>
+
     <link rel="stylesheet" href="./resources/css/index.css">
 </head>
+<h1>CS174a Project by Michael Glushchenko.</h1>
+<h2>Welcome to our online store!</h2>
+<h3>Choose the product search method:</h3>
 <body>
-<center>
-    <h1>
-        Search for products in a given category!
-    </h1>
-    <form class = "search" id = "search" method="post" action="SearchProduct">
-        <select class = "categoryDropDown" name="Category" size="1" onchange="testResults(this.form)">
-            <option>All</option>
-            <option>Laptop</option>
-            <option>Desktop</option>
-            <option>Monitor</option>
-            <option>Software</option>
-            <option>Printer</option>
-            <option>Camera</option>
-        </select>
-        <input type="text" class="searchInput" id="searchInput" name="Search" size="42" maxlength="100">
-        <input type="submit" data-value="Category" value="Search" id="searchButton">
-    </form>
-</center>
+<form action="/emart/searchByStockNumber.html">
+    <input type="submit" class="button" value="Search by stock number" />
+</form>
+<form action="/emart/searchByModelNumber.html">
+    <input type="submit" class="button" value="Search by model number" />
+</form>
+<form action="/emart">
+    <input type="submit" class="button" value="Filler 1 -- will be search by price" />
+</form>
+<form action="/emart">
+    <input type="submit" class="button" value="Filler 2 -- will be search by compatible products" />
+</form>
+<form action="/emart">
+    <input type="submit" class="button" value="Filler 3 -- will be search by attributes" />
+</form>
+<form action="/emart">
+    <input type="submit" class="button" value="Filler 4 -- will be a combo of all fields" />
+</form>
 </body>
 </html>

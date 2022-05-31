@@ -3,14 +3,51 @@
 body {
     background: black;
     color: white;
-    font-family: Montserrat, sans-serif;
-    font-size: 16px;
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
+}
+
+.imageFigure {
+    float: left;
+    width: 25%;
+    padding: 5px;
+}
+
+figure {
+    text-align: center;
+    visibility: visible;
+    margin-top: 20px;
+    position: absolute;
+    top: 40%;
+    left: 4%;
+}
+
+.laptop-image {
+    visibility: visible;
 }
 
 h1 {
     color: white;
     font-family: Montserrat, sans-serif;
     font-size: 32px;
+}
+
+.categoryDropDown {
+    border-radius: 10px;
+    background: rgb(215, 215, 215);
+}
+
+.searchInput {
+    background: rgb(255, 255, 255);
+    border-width: thin;
+    border-color: black;
+}
+
+.search #searchButton {
+    border-radius: 0px;
+    background: rgb(255, 255, 255);
+    margin-left: 0px;
+    padding-left: 0px;
+    border-width: thin;
+    border-color: black;
 }

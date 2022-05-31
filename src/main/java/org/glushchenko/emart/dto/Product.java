@@ -54,7 +54,7 @@ public class Product {
         return "Product{" +
                 "stock number='" + id + '\'' +
                 ", model number='" + modelNumber + '\'' +
-                ", categoryName='" + categoryName + '\'' +
+                ", category name='" + categoryName + '\'' +
                 ", warranty='" + warranty + '\'' +
                 ", price=" + price +
                 '}';
