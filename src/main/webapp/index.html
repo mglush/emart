@@ -1,32 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>eMart</title>
-
-    <link rel="stylesheet" href="./resources/css/index.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./resources/css/login.css">
 </head>
-<h1>CS174a Project by Michael Glushchenko.</h1>
-<h2>Welcome to our online store!</h2>
-<h3>Choose the product search method:</h3>
 <body>
-<form action="/emart/searchByStockNumber.html">
-    <input type="submit" class="button" value="Search by stock number" />
-</form>
-<form action="/emart/searchByModelNumber.html">
-    <input type="submit" class="button" value="Search by model number" />
-</form>
-<form action="/emart">
-    <input type="submit" class="button" value="Filler 1 -- will be search by price" />
-</form>
-<form action="/emart">
-    <input type="submit" class="button" value="Filler 2 -- will be search by compatible products" />
-</form>
-<form action="/emart">
-    <input type="submit" class="button" value="Filler 3 -- will be search by attributes" />
-</form>
-<form action="/emart">
-    <input type="submit" class="button" value="Filler 4 -- will be a combo of all fields" />
-</form>
+  <h2 style="text-align: center;">Please log in with valid credentials to use our store!</h2>
+  <form class="modal-content animate" action="/emart/LoginAuth" method="post">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <img src="https://i.pinimg.com/736x/f9/64/2a/f9642a97146f7c952c3f929d8e557655.jpg" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+      <label><b>Email</b></label>
+      <input type="email" placeholder="Enter Email" name="uemail" required>
+      <label><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required>
+
+      <button type="submit">Login</button>
+      <span class="psw"><a href="/emart/register.html" style="color:white;">Not a user?</a></span>
+    </div>
+  </form>
+<script>
+// javascript code goes here.
+// get the login modal
+var modal = document.getElementById('id01');
+
+// close the modal when user clicks outside of it.
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
 </body>
 </html>

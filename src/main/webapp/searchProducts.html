@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>eMart</title>
+    <link rel="stylesheet" href="./resources/css/products.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.js"
+            integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#searchButton').click(function () {
+                if ($('#description').val() == "" & $('#descriptionValue').val().length > 0) {
+                    $('#descriptionRequired').show();
+                    $('#descriptionValueRequired').hide();
+                    return false;
+                }
+                if ($('#descriptionValue').val() == "" & $('#description').val().length > 0) {
+                    $('#descriptionValueRequired').show();
+                    $('#descriptionRequired').hide();
+                    return false;
+                }
+                $('#descriptionRequired').hide();
+                $('#descriptionValueRequired').hide();
+            });
+        });
+    </script>
+</head>
+<body>
+<center>
+    <h1>
+        Search for products in our lovely store via this interface!
+    </h1>
+    <form class = "search" id = "search" method="post" action="SearchProduct">
+        <select class = "categoryDropDown" name="category" size="1" onchange="testResults(this.form)">
+            <option>All</option>
+            <option>Laptop</option>
+            <option>Desktop</option>
+            <option>Monitor</option>
+            <option>Software</option>
+            <option>Printer</option>
+            <option>Camera</option>
+        </select>
+        <input type="text" class="searchInput" id="stockNumber" placeholder="Enter a stock number!" name="stockNumber" size="42" maxlength="100">
+        <input type="text" class="searchInput" id="modelNumber" placeholder="Enter a model number!" name="modelNumber" size="42" maxlength="100">
+        <input type="text" class="searchInput" id="manufacturer" placeholder="Enter a manufacturer!" name="manufacturer" size="42" maxlength="100">
+        <input type="text" class="searchInput" id="description" placeholder="Enter a description!" name="description" size="42" maxlength="100">
+        <input type="text" class="searchInput" id="descriptionValue" placeholder="Enter a value!" name="descriptionValue" size="42" maxlength="100">
+        <input type="submit" data-value="category" value="Search" id="searchButton">
+    </form>
+    <span class="searchInput" id="descriptionRequired" style="display:none;color:white;background:black;">Description is required when a description value is entered!</span>
+    <span class="searchInput" id="descriptionValueRequired" style="display:none;color:white;background:black;">Description value is required when a description is entered!</span>
+</center>
+</body>
+</html>

@@ -41,6 +41,7 @@ h1 {
     background: rgb(255, 255, 255);
     border-width: thin;
     border-color: black;
+    width: 10%;
 }
 
 .search #searchButton {

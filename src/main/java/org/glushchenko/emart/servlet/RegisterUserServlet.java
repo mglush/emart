@@ -35,9 +35,9 @@ public class RegisterUserServlet extends HttpServlet {
 
         System.out.println(customerString);
 
-        request.setAttribute("customer", customerString);
-        request.setAttribute("manager", "false");
-        RequestDispatcher view = request.getRequestDispatcher("index.html");
+        request.getSession().setAttribute("customer", customer.getId());
+        request.getSession().setAttribute("manager", "false");
+        RequestDispatcher view = request.getRequestDispatcher("home.html");
         view.forward(request, response);
     }
 }

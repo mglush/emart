@@ -22,21 +22,19 @@ public class LoginAuthServlet extends HttpServlet {
         String email = request.getParameter("uemail");
         String password = request.getParameter("psw");
 
-        System.out.println("email: " + email + "password: " + password);
-
         CustomerService customerService = new CustomerService();
         Customer customer = customerService.authenticateLogin(email, password);
 
-        System.out.println(customer.toString());
+        System.out.println("Login Authentication:" + customer.toString());
+
         if (customer.getId() == null) {
             RequestDispatcher view = request.getRequestDispatcher("register.html");
             view.forward(request, response);
         }
         else {
-            String customerString = customer.toString();
-            request.setAttribute("customer", customerString);
-            request.setAttribute("manager", "false");
-            RequestDispatcher view = request.getRequestDispatcher("index.html");
+            request.getSession().setAttribute("customer", customer.getId());
+            request.getSession().setAttribute("manager", "false");
+            RequestDispatcher view = request.getRequestDispatcher("home.html");
             view.forward(request, response);
         }
     }

@@ -13,6 +13,9 @@
 </h1>
 <h2>
     Try going back and searching for a stock number, a category, or just select "All" to view what we have.
+    <form action="/emart/searchProducts.html">
+        <input type="submit" class="button" value="Go back" />
+    </form>
 </h2>
 </body>
 </html>
