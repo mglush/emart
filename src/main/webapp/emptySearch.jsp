@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <title>Empty Search</title>
     <link rel="stylesheet" href="./resources/css/products.css">
+    <script>
+    function goBack() {
+        window.history.back()
+    }
+    </script>
 </head>
 <body>
 <center>
@@ -12,10 +17,8 @@
     We sincerely apologize, there is nothing in store for ya.
 </h1>
 <h2>
-    Try going back and searching for a stock number, a category, or just select "All" to view what we have.
-    <form action="/emart/searchProducts.html">
-        <input type="submit" class="button" value="Go back" />
-    </form>
+    Try going back and searching for correct information, or select "All" to view what we have.
 </h2>
+<button type="button" onclick="goBack()">Go Back</button>
 </body>
 </html>

@@ -10,11 +10,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService {
+    
+    public List<String> getAllProductIDs() {
+        List<String> results = new ArrayList<>();
+        String query = "SELECT p.id FROM products p";
 
-    /*
-    * input: a string representing a valid category name.
-    * output: a list of products for the given category.
-    * */
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "glushchenko", "glushDatabase");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                results.add(resultSet.getString(1));
+            }
+
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return results;
+    }
+
     public List<Product> getProductsByCategory(String categoryName) {
         List<Product> products = new ArrayList<>();
         String query = "" +
@@ -31,6 +50,48 @@ public class ProductService {
         if (!categoryName.equals("All")) {
             query += "  AND c.name = '" + categoryName + "'";
         }
+
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "glushchenko", "glushDatabase");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                Product product = new Product();
+
+                product.setId(resultSet.getString(1));
+                product.setModelNumber(resultSet.getString(2));
+                product.setCategoryName(resultSet.getString(3));
+                product.setWarranty(resultSet.getBigDecimal(4));
+                product.setPrice(resultSet.getBigDecimal(5));
+
+                products.add(product);
+            }
+
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return products;
+    }
+
+    public List<Product> getCompatibleProducts(String stockNumber) {
+        List<Product> products = new ArrayList<>();
+        String query = "" +
+                "SELECT" +
+                "  p.id," +
+                "  p.model_number," +
+                "  c.name," +
+                "  p.warranty," +
+                "  p.price " +
+                "FROM products p, product_compatibilities pc, categories c " +
+                "WHERE " +
+                "  p.id = pc.compatible_products_id " +
+                "  AND p.categories_id = c.id " +
+                "  AND pc.products_id = '" + stockNumber + "'";
 
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");

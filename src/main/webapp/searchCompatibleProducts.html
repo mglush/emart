@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Compatible Products</title>
+    <link rel="stylesheet" href="./resources/css/products.css">
+    <script>
+    function goBack() {
+        window.history.back()
+    }
+    </script>
+</head>
+<body>
+<center>
+    <h1>
+        Enter a stock number to see all compatible products.
+    </h1>
+    <form class = "search" id = "search" method="post" action="SearchProduct">
+        <input type="text" class="searchInput" id="stockNumber" placeholder="Enter a stock number!" name="compatibleStockNumber" size="42" maxlength="100">
+        <input type="submit" value="Search" id="searchButton">
+    </form>
+    <button class="goBackButton" id="goBackButton" type="button" onclick="goBack()">Go Back</button>
+</center>
+</body>
+</html>

@@ -24,15 +24,11 @@ public class RegisterUserServlet extends HttpServlet {
         String email = request.getParameter("uemail");
         String address = request.getParameter("uaddress");
 
-        System.out.println("Successfully reached Customer service entry.");
-
         CustomerService customerService = new CustomerService();
         Customer customer = customerService.createCustomer(password, password, name, email, address);
 
-        System.out.println("Successfully created a customer in the database.");
-
+        System.out.println("Successfully created a customer in the database:");
         String customerString = customer.toString();
-
         System.out.println(customerString);
 
         request.getSession().setAttribute("customer", customer.getId());

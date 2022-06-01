@@ -30,28 +30,42 @@ public class SearchProductServlet extends HttpServlet {
         String compatibleStockNumber = request.getParameter("compatibleStockNumber");
 
         // format the inputs for query entries
-        stockNumber = stockNumber.toUpperCase();
-        if (manufacturer.length() > 0) {
-            manufacturer = manufacturer.substring(0, 1).toUpperCase() + manufacturer.substring(1);
+        if (stockNumber != null && stockNumber.length() > 0) {
+            stockNumber = stockNumber.toUpperCase();
         }
-        if (description.length() > 0) {
-            description = description.substring(0, 1).toUpperCase() + description.substring(1);
+        if (manufacturer != null && manufacturer.length() > 0) {
+            manufacturer = manufacturer.substring(0, 1).toUpperCase() + manufacturer.substring(1).toLowerCase();
+        }
+        if (description != null && description.length() > 0) {
+            description = description.substring(0, 1).toUpperCase() + description.substring(1).toLowerCase();
         }
 
         System.out.println("customer cookie: " + request.getSession().getAttribute("customer"));
         System.out.println("manager cookie: " + request.getSession().getAttribute("manager"));
 
-        ProductService productService = new ProductService();
-        List<Product> products = new ArrayList<Product>();
-
         if (request.getSession().getAttribute("customer") == null) {
             RequestDispatcher view = request.getRequestDispatcher("index.html");
             view.forward(request, response);
         } else {
-            if (manufacturer.isEmpty() && stockNumber.isEmpty() && modelNumber.isEmpty() && description.isEmpty()) {
-                products = productService.getProductsByCategory(categoryName);
+            ProductService productService = new ProductService();
+
+            // set session attributes of current products to false.
+            List<String> productIDs = productService.getAllProductIDs();
+            for (String productID : productIDs) {
+                request.getSession().setAttribute(productID, "false");
+            }
+
+            // this will hold the result of the search query.
+            List<Product> products;
+
+            if (compatibleStockNumber != null) {
+                products = productService.getCompatibleProducts(compatibleStockNumber);
             } else {
-                products = productService.getProducts(stockNumber, categoryName, modelNumber, manufacturer, description, descriptionValue);
+                if (manufacturer.isEmpty() && stockNumber.isEmpty() && modelNumber.isEmpty() && description.isEmpty()) {
+                    products = productService.getProductsByCategory(categoryName);
+                } else {
+                    products = productService.getProducts(stockNumber, categoryName, modelNumber, manufacturer, description, descriptionValue);
+                }
             }
 
             if (products.isEmpty()) {
@@ -61,10 +75,12 @@ public class SearchProductServlet extends HttpServlet {
                 List<String> productStrings = new ArrayList<>();
 
                 for (Product product : products) {
+                    request.getSession().setAttribute(product.getId(), "true");
                     productStrings.add(product.toString());
                 }
 
                 request.setAttribute("products", productStrings);
+                request.getSession().setAttribute("products", productStrings);
 
                 RequestDispatcher view = request.getRequestDispatcher("products.jsp");
                 view.forward(request, response);

@@ -13,6 +13,12 @@ body {
     padding: 5px;
 }
 
+.goBackButton {
+    position:absolute;
+    top: 0%;
+    left: 95%;
+}
+
 figure {
     text-align: center;
     visibility: visible;
@@ -22,8 +28,14 @@ figure {
     left: 4%;
 }
 
-.laptop-image {
-    visibility: visible;
+.image {
+    background: black;
+    color: white;
+    text-align: justify;
+    width: 20%;
+    float: left;
+    width: 20%;
+    padding: 5px;
 }
 
 h1 {
