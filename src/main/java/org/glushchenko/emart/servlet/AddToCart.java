@@ -12,7 +12,7 @@ import java.io.IOException;
         name = "displayorderlineservlet",
         urlPatterns = "/OrderLine"
 )
-public class DisplayOrderLineServlet extends HttpServlet {
+public class OrderLineServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
