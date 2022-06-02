@@ -141,6 +141,23 @@ public class OrderService {
         }
     }
 
+    public void removeProductFromOrder(String orderNumber, String stockNumber) {
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "glushchenko", "glushDatabase");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("" +
+                    "DELETE FROM order_lines " +
+                    "WHERE orders_id = '" + orderNumber + "'" +
+                    "  AND products_id = '" + stockNumber + "'");
+
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     public Float getOrderSubtotal(String orderNumber) {
         Float result = null;
         try {
@@ -165,19 +182,158 @@ public class OrderService {
         return result;
     }
 
-    public Float getOrderTotal(String orderNumber) {
+    public Float getOrderTotal(String orderNumber, Float discount, Float shipping_and_handling) {
         Float result = getOrderSubtotal(orderNumber);
-        // query customer database for customer status, query policy table for policy.
-        // apply discount and shipping and handling as policy indicates.
-        return result;
+        return result + result*discount + result*shipping_and_handling;
     }
 
-    public Boolean confirmOrder(String orderNumber) {
-        // gonna do this when doing the checkout servlet.
-        // query matthew's inventory to make sure we have enough items.
+    public Order confirmOrder(String orderNumber, String customerID) {
+        List<Product> products = displayOrderLinesContents(orderNumber);
+        Order order = new Order();
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "glushchenko", "glushDatabase");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet;
+            String query = "" +
+                    "SELECT status " +
+                    "FROM customers " +
+                    "WHERE id = '" + customerID + "'";
+            resultSet = statement.executeQuery(query);
+            resultSet.next();
+            String status = resultSet.getString(1).toLowerCase();
+            System.out.println("status: " + status);
 
-        // add current time to "checked_out_at" member of the order to finalize the order.
+            query = "" +
+                "SELECT value " +
+                "FROM pricing_rules " +
+                "WHERE name = '" + status + "'";
+            resultSet = statement.executeQuery(query);
+            resultSet.next();
+            Float discount = resultSet.getFloat(1);
+            System.out.println("discount: " + discount.toString());
 
-        return true;
+            query = "" +
+                    "UPDATE orders " +
+                    "SET discount = '" + discount.toString() + "' " +
+                    "WHERE id = '" + orderNumber + "'";
+            resultSet = statement.executeQuery(query);
+            resultSet.next();
+
+            query = "" +
+                    "SELECT value " +
+                    "FROM pricing_rules " +
+                    "WHERE name = 'shipping_and_handling'";
+            resultSet = statement.executeQuery(query);
+            resultSet.next();
+            Float shipping_and_handling = resultSet.getFloat(1);
+            System.out.println("shipping_and_handling: " + shipping_and_handling.toString());
+
+            query = "" +
+                    "SELECT value " +
+                    "FROM pricing_rules " +
+                    "WHERE name = 'free_shipping_threshold'";
+            resultSet = statement.executeQuery(query);
+            resultSet.next();
+            Float threshold = resultSet.getFloat(1);
+            System.out.println("threshold for free shipping: " + threshold.toString());
+
+            if (getOrderSubtotal(orderNumber) > threshold) {
+                shipping_and_handling = Float.valueOf(0);
+            }
+
+            query = "" +
+                    "UPDATE orders " +
+                    "SET shipping_and_handling = '" + shipping_and_handling.toString() + "' " +
+                    "WHERE id = '" + orderNumber + "'";
+            resultSet = statement.executeQuery(query);
+            resultSet.next();
+
+            Float total = getOrderTotal(orderNumber, discount, shipping_and_handling);
+            System.out.println("total: " + total.toString());
+            query = "" +
+                    "UPDATE orders " +
+                    "SET total = '" + total.toString() + "' " +
+                    "WHERE id = '" + orderNumber +
+                    "'";
+            resultSet = statement.executeQuery(query);
+            resultSet.next();
+
+            Long time = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
+            System.out.println("time: " + time.toString());
+            query = "" +
+                    "UPDATE orders " +
+                    "SET checked_out_at = '" +
+                    time.toString()
+                    + "' " +
+                    "WHERE id = '" + orderNumber +
+                    "'";
+            resultSet = statement.executeQuery(query);
+            resultSet.next();
+
+            order.setId(orderNumber);
+            order.setDiscount(discount.toString());
+            order.setShipping_and_handling(shipping_and_handling.toString());
+            order.setTotal(total.toString());
+            order.setChecked_out_at(time.toString());
+
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return order;
     }
 }
+// insert code here to query matt's database to check inventory.
+// inventory table currently empty, i'll uncomment dis section whenever its populated.
+//        try {
+//            Class.forName("oracle.jdbc.driver.OracleDriver");
+//            Connection connection = DriverManager.getConnection(
+//                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "maragaw", "password");
+//            Statement statement = connection.createStatement();
+//            ResultSet resultSet;
+//            String query;
+//
+//            for (Product product : products) {
+//                query = "SELECT qty " +
+//                        "FROM inventory " +
+//                        "WHERE item_id = '" +
+//                        product.getId() + "'";
+//                resultSet = statement.executeQuery(query);
+//                resultSet.next();
+//                // inventory check here.
+//                if (product.getWarranty().compareTo(resultSet.getBigDecimal(1)) == 1) {
+//                    throw(new Exception("WE ARE LOW ON PRODUCT #" + product.getId()));
+//                }
+//            }
+//
+//            connection.close();
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+//        // decrement the quantities of each product in our list if we haven't thrown an error yet.
+//        try {
+//            Class.forName("oracle.jdbc.driver.OracleDriver");
+//            Connection connection = DriverManager.getConnection(
+//                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "maragaw", "password");
+//            Statement statement = connection.createStatement();
+//            ResultSet resultSet;
+//            String query;
+//
+//            // update order_lines set count=count-1 where orders_id = 'AA00402';
+//            for (Product product : products) {
+//                query = "UPDATE inventory " +
+//                        "SET qty=qty-" + product.getWarranty().toString() + " " +
+//                        "WHERE item_id = '" +
+//                        product.getId() + "'";
+//                resultSet = statement.executeQuery(query);
+//            }
+//
+//            connection.close();
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+// fill in the rest of order information,
+// i.e. checked_out_at, total, discount, shipping_and_handling.

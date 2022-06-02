@@ -27,6 +27,32 @@ body {
     border-color: black;
 }
 
+.otherWebsiteFeaturesButton {
+    position:absolute;
+    top: 0%;
+    left: 95%;
+}
+
+.removeItemInput {
+    position:absolute;
+    top: 15%;
+    left: 75%;
+    width: 175px;
+    height: 15px;
+    border-radius: 20px;
+    border-color: black;
+}
+
+.removeItemButton {
+    position:absolute;
+    top: 18%;
+    left: 75%;
+    width: 175px;
+    height: 20px;
+    border-radius: 20px;
+    border-color: black;
+}
+
 .cartPageButtonProceedToCheckout {
     position:absolute;
     left: 700px;

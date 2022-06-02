@@ -27,6 +27,10 @@ if (result != null) {
     out.println("Cart subtotal: $" + request.getSession().getAttribute("subtotal"));
 }
 %>
+    <form method="post" action="/emart/RemoveItem">
+        <input type="text" class="removeItemInput" id="removeItemInput" placeholder="Enter stock number to remove!" name="removeStockNumber" size="42" maxlength="100">
+        <button class="removeItemButton" id="removeItemButton" type="submit">Remove from cart</button>
+    </form>
     <button class="cartPageButtonShopMore" type="button" onclick="shopMore()">Shop more items</button>
     <form method="post" action="/emart/Checkout">
         <button class="cartPageButtonProceedToCheckout" type="submit">Proceed to checkout</button>
