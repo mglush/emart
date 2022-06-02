@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>eMart Home Page</title>
+
+    <link rel="stylesheet" href="./resources/css/index.css">
+</head>
+<h1>CS174a Project by Michael Glushchenko.</h1>
+<h2>Welcome to the eMart manager interface!</h2>
+<h3>Choose an action:</h3>
+<body>
+<div class="buttonsInDaMiddle">
+    <form method="post" action="/emart/MonthlyStatistics">
+        <input type="submit" class="managerButton" id="managerButton1" value="Print monthly statistics" />
+    </form>
+
+    <form method="post" action="/emart/ChangeCustomerStatus">
+        <input type="submit" class="managerButton" id="managerButton2" value="Change customer status" />
+    </form>
+
+    <form method="post" action="/emart/SendOrderToManufacturer">
+        <input type="submit" class="managerButton" id="managerButton3" value="Send order to manufacturer" />
+    </form>
+
+    <form method="post" action="/emart/ChangeItemPrice">
+        <input type="submit" class="managerButton" id="managerButton4" value="Change price of an item" />
+    </form>
+
+    <form method="post" action="/emart/DeleteOrders">
+        <input type="submit" class="managerButton" id="managerButton5" value="Delete unnecessary orders" />
+    </form>
+
+    <form method="post" action="/emart/ChangePolicy">
+        <input type="submit" class="managerButton" id="managerButton6" value="Adjust pricing policy" />
+    </form>
+</div>
+</body>
+</html>

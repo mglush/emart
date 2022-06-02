@@ -32,7 +32,11 @@ public class LoginAuthServlet extends HttpServlet {
             view.forward(request, response);
         } else {
             request.getSession().setAttribute("customer", customer.getId());
-            request.getSession().setAttribute("manager", "false");
+            if (customer.getCustomerType() == 2) {
+                request.getSession().setAttribute("manager", "true");
+            } else {
+                request.getSession().setAttribute("manager", "false");
+            }
             RequestDispatcher view = request.getRequestDispatcher("home.jsp");
             view.forward(request, response);
         }

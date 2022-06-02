@@ -48,8 +48,8 @@
 <%
 if (request.getSession().getAttribute("manager").equals("true")) {
 %>
-    <form method="post" action="/emart/home.jsp">
-        <input type="submit" class="button" id="managerButton" value="Filler -- will be a button for the manager to manage store" />
+    <form method="post" action="/emart/ManageStore">
+        <input type="submit" class="hiddenManagerButton" id="hiddenManagerButton" value="Manage store" />
     </form>
 <%
 }
