@@ -53,6 +53,9 @@
         <input type="text" class="searchInput" id="descriptionValue" placeholder="Enter a value!" name="descriptionValue" size="42" maxlength="100">
         <input type="submit" data-value="category" value="Search" id="searchButton">
     </form>
+    <form method="post" action="/emart/ViewCart">
+        <input type="submit" class="viewCartButton" value="View Cart" />
+    </form>
     <button class="goBackButton" id="goBackButton" type="button" onclick="goBack()">Go Back</button>
     <span class="searchInput" id="descriptionRequired" style="display:none;color:white;background:black;">Description is required when a description value is entered!</span>
     <span class="searchInput" id="descriptionValueRequired" style="display:none;color:white;background:black;">Description value is required when a description is entered!</span>

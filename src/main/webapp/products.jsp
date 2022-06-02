@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <title>eMart</title>
     <link rel="stylesheet" href="./resources/css/products.css">
+    <script>
+    function goBack() {
+        window.history.back()
+    }
+    </script>
 </head>
 <body>
 <center>
@@ -136,6 +141,7 @@ if (request.getSession().getAttribute("AA00602") == "true") {
 <%
 }
 %>
+<button class="goBackButton" id="goBackButton" type="button" onclick="goBack()">Go Back</button>
 <p style="clear: both;">
 </body>
 </html>

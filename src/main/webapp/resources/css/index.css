@@ -28,8 +28,35 @@ body {
     padding: 0;
 }
 
+.runningOrder {
+    border-radius: 20px;
+    border-size: thin;
+    border-color: black;
+}
+
+.viewingOrder {
+    border-radius: 20px;
+    border-size: thin;
+    border-color: black;
+}
+
 .button {
     border-radius: 100px;
     border-size: thin;
     border-color: black;
+}
+
+.goBackButton {
+    border-radius: 20px;
+    border-size: thin;
+    border-color: black;
+    width: 75px;
+}
+
+.viewCartButton {
+    border-radius: 20px;
+    border-size: thin;
+    border-color: black;
+    width: 75px;
+    height:20px;
 }

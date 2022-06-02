@@ -76,6 +76,34 @@ public class OrderService {
         return order;
     }
 
+    public Boolean checkOrderConfirmation(String orderID) {
+        Boolean result;
+
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "glushchenko", "glushDatabase");
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery("" +
+                    "SELECT checked_out_at " +
+                    "FROM orders " +
+                    "WHERE " +
+                    "  id = '" + orderID + "'");
+
+            resultSet.next();
+            if (resultSet.getString(1).isEmpty() || resultSet.getString(1) == null) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return false;
+    }
+
     public List<Product> displayOrderLinesContents(String orderNumber) {
         List<Product> products = new ArrayList<>();
 
@@ -109,6 +137,37 @@ public class OrderService {
         return products;
     }
 
+    public Order getOrderByID(String orderNumber) {
+        Order order = new Order();
+
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "glushchenko", "glushDatabase");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("" +
+                    "SELECT id, " +
+                    "  discount, " +
+                    "  shipping_and_handling, " +
+                    "  checked_out_at, " +
+                    "  total " +
+                    "FROM orders " +
+                    "WHERE " +
+                    "  id = " + orderNumber);
+
+            resultSet.next();
+            order.setId(resultSet.getString(1));
+            order.setDiscount(resultSet.getString(2));
+            order.setShipping_and_handling(resultSet.getString(3));
+            order.setChecked_out_at(resultSet.getString(4));
+            order.setTotal(resultSet.getString(5));
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return order;
+    }
     public void addProductToOrder(String orderNumber, String stockNumber, String count) {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -174,6 +233,29 @@ public class OrderService {
 
             resultSet.next();
             result = resultSet.getFloat(1);
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return result;
+    }
+
+    public int getProductCountInOrder(String orderNumber, String productID) {
+        int result = 0;
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "glushchenko", "glushDatabase");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("" +
+                    "SELECT count " +
+                    "FROM order_lines " +
+                    "WHERE orders_id = '" + orderNumber + "'" +
+                    "  AND products_id = '" + productID + "'");
+
+            resultSet.next();
+            result = resultSet.getInt(1);
             connection.close();
         } catch (Exception e) {
             System.out.println(e);

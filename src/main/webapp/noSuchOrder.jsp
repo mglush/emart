@@ -14,7 +14,7 @@
 <body>
 <center>
 <h1>
-    We sincerely apologize, one of the items you chose is out of stock. Go ahead and try again.
+    We apologize, but an order with this order number does not exist.
 </h1>
 <button type="button" onclick="otherFeatures()">Home Page</button>
 </body>

@@ -14,7 +14,7 @@
 <body>
 <center>
 <%
-out.println("<h1> Order Confirmation #" + request.getSession().getAttribute("order") + ". </h1>");
+out.println("<h1> Previous Order #" + request.getSession().getAttribute("order") + ". </h1>");
 List<String> result = (List<String>) request.getSession().getAttribute("cart");
 out.println("<br><br><br>");
 if (result != null) {
