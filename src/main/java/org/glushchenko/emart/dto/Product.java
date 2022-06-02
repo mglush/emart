@@ -59,4 +59,12 @@ public class Product {
                 ", price=" + price +
                 '}';
     }
+
+    public String partialToString() {
+        return "Product{" +
+                "stock number='" + id + '\'' +
+                ", price=" + price +
+                ", count=" + warranty +
+                '}';
+    }
 }

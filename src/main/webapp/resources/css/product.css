@@ -17,6 +17,26 @@ body {
     visibility: hidden;
 }
 
+.cartPageButtonShopMore {
+    position:absolute;
+    left: 550px;
+    top: 100px;
+    width: 150px;
+    height: 20px;
+    border-radius: 20px;
+    border-color: black;
+}
+
+.cartPageButtonProceedToCheckout {
+    position:absolute;
+    left: 700px;
+    top: 100px;
+    width: 150px;
+    height: 20px;
+    border-radius: 20px;
+    border-color: black;
+}
+
 .addToCartButton {
     position:absolute;
     left: 455px;
@@ -31,7 +51,7 @@ body {
     position:absolute;
     left: 530px;
     top:390px;
-    height: 15px;
+    height: 20px;
     width: 170px;
     border-color:black;
 }

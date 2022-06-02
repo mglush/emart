@@ -33,7 +33,7 @@ public class LoginAuthServlet extends HttpServlet {
         } else {
             request.getSession().setAttribute("customer", customer.getId());
             request.getSession().setAttribute("manager", "false");
-            RequestDispatcher view = request.getRequestDispatcher("home.html");
+            RequestDispatcher view = request.getRequestDispatcher("home.jsp");
             view.forward(request, response);
         }
     }

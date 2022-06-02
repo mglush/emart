@@ -1,8 +1,9 @@
+<%@ page import ="java.util.*" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>eMart</title>
+    <title>eMart Home Page</title>
 
     <link rel="stylesheet" href="./resources/css/index.css">
 </head>
@@ -17,9 +18,14 @@
     <form action="/emart/searchCompatibleProducts.html">
         <input type="submit" class="button" value="Search for compatible products." />
     </form>
-
+<%
+if (request.getSession().getAttribute("manager").equals("true")) {
+%>
     <form action="/emart/home.html">
         <input type="submit" class="button" id="managerButton" value="Filler -- will be a button for the manager to manage store" />
     </form>
+<%
+}
+%>
 </body>
 </html>
