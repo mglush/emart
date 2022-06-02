@@ -35,7 +35,7 @@ if (result != null) {
         <button class="cartPageButtonProceedToCheckout" type="submit">Proceed to checkout</button>
     </form>
     <form method="post" action="/emart/home.jsp">
-        <button class="cartPageButtonShopMore" type="submit">Shop more items</button>
+        <button class="cartPageButtonShopMore" type="submit">Shop more</button>
     </form>
 
 <%

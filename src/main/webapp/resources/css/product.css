@@ -86,6 +86,9 @@ body {
     position:absolute;
     top: 0%;
     left: 95%;
+    border-size: thin;
+    border-color: black;
+    border-radius: 20px;
 }
 
 .image {
@@ -99,6 +102,21 @@ body {
 }
 
 h1 {
+    color: white;
+    font-family: Montserrat, sans-serif;
+    font-size: 32px;
+}
+h2 {
+    color: white;
+    font-family: Montserrat, sans-serif;
+    font-size: 32px;
+}
+h3 {
+    color: white;
+    font-family: Montserrat, sans-serif;
+    font-size: 32px;
+}
+h4 {
     color: white;
     font-family: Montserrat, sans-serif;
     font-size: 32px;
