@@ -7,8 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="emart_database" />
-        <module name="emart" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="emart" target="18" />
+      <module name="emart_edepot" target="18" />
+    </bytecodeTargetLevel>
   </component>
 </project>

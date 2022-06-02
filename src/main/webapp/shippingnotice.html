@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>eDepot</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"
+            integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#searchButton').click(function () {
+                if ($('#description').val() == "" & $('#descriptionValue').val().length > 0) {
+                    $('#descriptionRequired').show();
+                    $('#descriptionValueRequired').hide();
+                    return false;
+                }
+                if ($('#descriptionValue').val() == "" & $('#description').val().length > 0) {
+                    $('#descriptionValueRequired').show();
+                    $('#descriptionRequired').hide();
+                    return false;
+                }
+                $('#descriptionRequired').hide();
+                $('#descriptionValueRequired').hide();
+            });
+        });
+    </script>
+    <script>
+        function goBack() {
+            window.history.back()
+        }
+    </script>
+</head>
+<body>
+    <h1>
+        Submit a shipping notice to the Warehouse
+    </h1>
+    <input type="text" class="searchInput" id="shippingnoticeid" placeholder="Enter unique shipping notice ID" name="shippingnoticeid" size="42" maxlength="100">
+    <input type="text" class="searchInput" id="shippingcompanyname" placeholder="Enter name of shipping company" name="shippingcompanyid" size="42" maxlength="100">
+    <textarea type="text"
+              name="itemlist"
+              rows="5"
+              class="form-control"
+    placeholder="Enter list of items">
+    </textarea>
+    <input type="submit" data-value="category" value="Search" id="searchButton">
+    <button class="goBackButton" id="goBackButton" type="button" onclick="goBack()">Go Back</button>
+</body>
+</html>
