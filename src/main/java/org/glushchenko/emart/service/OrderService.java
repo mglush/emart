@@ -272,6 +272,55 @@ public class OrderService {
     public Order confirmOrder(String orderNumber, String customerID) {
         List<Product> products = displayOrderLinesContents(orderNumber);
         Order order = new Order();
+        
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "maragaw", "password");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet;
+            String query;
+
+            for (Product product : products) {
+                query = "SELECT qty " +
+                        "FROM inventory " +
+                        "WHERE item_id = '" +
+                        product.getId() + "'";
+                resultSet = statement.executeQuery(query);
+                resultSet.next();
+                // inventory check here.
+                if (product.getWarranty().compareTo(resultSet.getBigDecimal(1)) == 1) {
+                    throw(new Exception("WE ARE LOW ON PRODUCT #" + product.getId()));
+                }
+            }
+
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        // decrement the quantities of each product in our list if we haven't thrown an error yet.
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "maragaw", "password");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet;
+            String query;
+
+            // update order_lines set count=count-1 where orders_id = 'AA00402';
+            for (Product product : products) {
+                query = "UPDATE inventory " +
+                        "SET qty=qty-" + product.getWarranty().toString() + " " +
+                        "WHERE item_id = '" +
+                        product.getId() + "'";
+                resultSet = statement.executeQuery(query);
+            }
+
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection connection = DriverManager.getConnection(
@@ -525,54 +574,3 @@ public class OrderService {
         }
     }
 }
-// insert code here to query matt's database to check inventory.
-// inventory table currently empty, i'll uncomment dis section whenever its populated.
-//        try {
-//            Class.forName("oracle.jdbc.driver.OracleDriver");
-//            Connection connection = DriverManager.getConnection(
-//                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "maragaw", "password");
-//            Statement statement = connection.createStatement();
-//            ResultSet resultSet;
-//            String query;
-//
-//            for (Product product : products) {
-//                query = "SELECT qty " +
-//                        "FROM inventory " +
-//                        "WHERE item_id = '" +
-//                        product.getId() + "'";
-//                resultSet = statement.executeQuery(query);
-//                resultSet.next();
-//                // inventory check here.
-//                if (product.getWarranty().compareTo(resultSet.getBigDecimal(1)) == 1) {
-//                    throw(new Exception("WE ARE LOW ON PRODUCT #" + product.getId()));
-//                }
-//            }
-//
-//            connection.close();
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//        // decrement the quantities of each product in our list if we haven't thrown an error yet.
-//        try {
-//            Class.forName("oracle.jdbc.driver.OracleDriver");
-//            Connection connection = DriverManager.getConnection(
-//                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "maragaw", "password");
-//            Statement statement = connection.createStatement();
-//            ResultSet resultSet;
-//            String query;
-//
-//            // update order_lines set count=count-1 where orders_id = 'AA00402';
-//            for (Product product : products) {
-//                query = "UPDATE inventory " +
-//                        "SET qty=qty-" + product.getWarranty().toString() + " " +
-//                        "WHERE item_id = '" +
-//                        product.getId() + "'";
-//                resultSet = statement.executeQuery(query);
-//            }
-//
-//            connection.close();
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-// fill in the rest of order information,
-// i.e. checked_out_at, total, discount, shipping_and_handling.
