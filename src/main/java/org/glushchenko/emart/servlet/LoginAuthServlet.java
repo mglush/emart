@@ -30,6 +30,10 @@ public class LoginAuthServlet extends HttpServlet {
         if (customer.getId() == null) {
             RequestDispatcher view = request.getRequestDispatcher("register.html");
             view.forward(request, response);
+        } else if (customer.getCustomerType() == 3){
+            request.getSession().setAttribute("vendor", true);
+            RequestDispatcher view = request.getRequestDispatcher("warehousehome.jsp");
+            view.forward(request, response);
         } else {
             request.getSession().setAttribute("customer", customer.getId());
             if (customer.getCustomerType() == 2) {

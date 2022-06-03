@@ -10,5 +10,8 @@
         <module name="emart" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="emart_edepot" target="18" />
+    </bytecodeTargetLevel>
   </component>
 </project>
