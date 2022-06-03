@@ -87,4 +87,59 @@ public class CustomerService {
 
         return customer;
     }
+
+    public Customer getCustomerByID(String customerID) {
+        Customer customer = new Customer();
+
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "glushchenko", "glushDatabase");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("" +
+                    "SELECT" +
+                    "  c.id," +
+                    "  c.name," +
+                    "  c.email," +
+                    "  c.address," +
+                    "  c.customer_type, " +
+                    "  c.status " +
+                    "FROM customers c " +
+                    "WHERE " +
+                    "  c.id = '" + customerID + "'");
+            while (resultSet.next()) {
+                customer.setId(resultSet.getString(1));
+                customer.setName(resultSet.getString(2));
+                customer.setEmail(resultSet.getString(3));
+                customer.setAddress(resultSet.getString(4));
+                customer.setCustomerType(resultSet.getInt(5));
+                customer.setStatus(resultSet.getString(6));
+            }
+
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return customer;
+    }
+
+    public void changeCustomerStatus(String customerID, String newStatus) {
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "glushchenko", "glushDatabase");
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery("" +
+                    "UPDATE customers " +
+                    "SET status = '" + newStatus + "' " +
+                    "WHERE id = '" + customerID + "'");
+
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
 }

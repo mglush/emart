@@ -14,7 +14,7 @@
 <body>
 <center>
 <h1>
-    We apologize, but the order with that ID does not exist.
+    We apologize, but we do not have a policy with that name.
 </h1>
 <button type="button" onclick="otherFeatures()">Manager Home Page</button>
 </body>

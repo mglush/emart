@@ -30,7 +30,7 @@ public class CheckoutServlet extends HttpServlet {
 
             OrderService orderService = new OrderService();
             Order order = orderService.getLastOrder(customerID); // works as expected.
-            Order final_order = orderService.confirmOrder(order.getId(), customerID); // implemented. still need to test this one.
+            Order final_order = orderService.confirmOrder(order.getId(), customerID); // works as expected
 
             if (final_order.getChecked_out_at() != null) {
                 List<Product> products = orderService.displayOrderLinesContents(order.getId());
@@ -46,6 +46,9 @@ public class CheckoutServlet extends HttpServlet {
                 request.getSession().setAttribute("discount", final_order.getDiscount().toString());
                 request.getSession().setAttribute("shipping", final_order.getShipping_and_handling().toString());
                 request.getSession().setAttribute("total", final_order.getTotal().toString());
+
+                // would have put code here to update customer status after an order.
+                // i.e., get total money spent by the customer, set their status accordingly.
 
                 if (Float.valueOf(final_order.getTotal()) > 0) {
                     RequestDispatcher view = request.getRequestDispatcher("orderConfirmation.jsp");

@@ -141,6 +141,9 @@ if (request.getSession().getAttribute("AA00602") == "true") {
 <%
 }
 %>
+<form method="post" action="/emart/ViewCart">
+    <input type="submit" class="viewCartButton" value="View Cart" />
+</form>
 <button class="goBackButton" id="goBackButton" type="button" onclick="goBack()">Go Back</button>
 <p style="clear: both;">
 </body>

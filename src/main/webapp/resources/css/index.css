@@ -28,6 +28,30 @@ body {
     padding: 0;
 }
 
+.changingCustomerStatusBlock {
+    border-radius: 20px;
+    border-size: thin;
+    border-color: black;
+    float:left;
+    padding-left: 15px;
+}
+
+.hiddenManagerButton {
+    border-radius: 20px;
+    border-size: thin;
+    border-color: black;
+    position:absolute;
+    top:60px;
+    left:1250px;
+}
+
+.managerButton {
+    border-radius: 20px;
+    border-size: thin;
+    border-color: black;
+    padding:left:50px;
+}
+
 .runningOrder {
     border-radius: 20px;
     border-size: thin;

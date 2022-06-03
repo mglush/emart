@@ -1,6 +1,7 @@
 -- populate customer_types table.
 INSERT INTO customer_types (id, type) VALUES ('1', 'client');
 INSERT INTO customer_types (id, type) VALUES ('2', 'manager');
+INSERT INTO customer_types (id, type) VALUES ('3', 'vendor');
 
 -- populating customers table.
 INSERT INTO customers (id, password, name, email, address, customer_type, status) VALUES ('Rhagrid', 'Rhagrid', 'Rubeus Hagrid', 'rhagrid@cs', '123 MyStreet, Goleta apt A, Ca', '1', 'Gold');
@@ -9,6 +10,7 @@ INSERT INTO customers (id, password, name, email, address, customer_type, status
 INSERT INTO customers (id, password, name, email, address, customer_type, status) VALUES ('Pquirrell', 'Pquirrell', 'Professor Quirrell', 'pquirrell@cs', '123 MyStreet, Goleta apt D, Ca', '1', 'New');
 INSERT INTO customers (id, password, name, email, address, customer_type, status) VALUES ('Sblack', 'Sblack', 'Sirius Black', 'sblack@cs', '123 MyStreet, Goleta apt E, Ca', '2', 'Green');
 INSERT INTO customers (id, password, name, email, address, customer_type, status) VALUES ('Ddiggle', 'Ddiggle', 'Dedalus Diggle', 'ddiggle@cs', '123 MyStreet, Goleta apt F, Ca', '1', 'Green');
+INSERT INTO customers (id, password, name, email, address, customer_type, status) VALUES ('test', 'test', 'Our Vendor', 'vendor@vendor.com', 'Isla Vista', '3', 'New');
 
 -- populating categories table.
 INSERT INTO categories (id, name) VALUES ('1', 'Laptop');

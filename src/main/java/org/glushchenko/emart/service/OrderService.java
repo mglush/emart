@@ -367,6 +367,163 @@ public class OrderService {
 
         return order;
     }
+
+    public List<String> getMonthlySalesPerProduct() {
+        List<String> results = new ArrayList<>();
+        String result;
+        long monthAgo = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) - 2629743;
+        String query = "" +
+                "SELECT products_id, sum(count), sum(count)*sum(price) " +
+                "FROM " + "( " +
+                    "SELECT b.products_id, b.count, b.price " +
+                    "FROM order_lines b " +
+                    "WHERE created_at > " + monthAgo +
+                ") " +
+                "GROUP BY products_id";
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "glushchenko", "glushDatabase");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                result = "{" + resultSet.getString(1) + ", " +
+                                resultSet.getString(2) + ", " +
+                                resultSet.getString(3) + "}";
+                results.add(result);
+            }
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return results;
+    }
+
+    // from ( select o.count, o.price, c.name from order_lines o, products p, categories c where o.products_id = p.id and p.categories_id = c.id )
+    public List<String> getMonthlySalesPerCategory() {
+        List<String> results = new ArrayList<>();
+        String result;
+        long monthAgo = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) - 2629743;
+        String query = "" +
+                "SELECT name, sum(count), sum(count)*sum(price) " +
+                "FROM " + "( " +
+                "SELECT c.name, o.count, o.price " +
+                "FROM order_lines o, products p, categories c " +
+                "WHERE created_at > '" + monthAgo + "' " +
+                "  AND o.products_id = p.id " +
+                "  AND p.categories_id = c.id " +
+                ") " +
+                "GROUP BY name";
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "glushchenko", "glushDatabase");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                result = "{" + resultSet.getString(1) + ", " +
+                        resultSet.getString(2) + ", " +
+                        resultSet.getString(3) + "}";
+                results.add(result);
+            }
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return results;
+    }
+
+    public String getCustomerWithMostPurchase() {
+        String result = "";
+        String query = "" +
+                "SELECT id, totalDollarAmount " +
+                " FROM ( " +
+                    " SELECT c.id, SUM(l.count*l.price) AS totalDollarAmount " +
+                    " FROM customers c, orders o, order_lines l " +
+                    " WHERE c.id = o.customers_id and o.id = l.orders_id " +
+                    " GROUP BY c.id " +
+                ")" +
+                "WHERE totalDollarAmount " +
+                " IN ( " +
+                    " SELECT MAX(result) " +
+                    " FROM (SELECT c1.id, SUM(l1.count*l1.price) AS result " +
+                           "  FROM customers c1, orders o1, order_lines l1" +
+                           "  WHERE c1.id=o1.customers_id " +
+                                " AND o1.id = l1.orders_id " +
+                          " GROUP BY c1.id " +
+                          ")" +
+                    ")";
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "glushchenko", "glushDatabase");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            resultSet.next();
+            result = "{" + resultSet.getString(1) + ", " +
+                    resultSet.getString(2) + "}";
+
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return result;
+    }
+
+    // this is not a good place to put the policy change function, but due to running out of time I won't
+    // be making the design more object oriented, there's not much need for that for the presentation.
+    // ideally policy would have its own class and a policy service, or manager service, or somethn like that.
+    public String getPricingPolicyByName(String policyName) {
+        String result = "";
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "glushchenko", "glushDatabase");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("" +
+                    "SELECT id, name, value " +
+                    "FROM pricing_rules " +
+                    "WHERE name = '" + policyName + "'");
+
+            resultSet.next();
+            result = "{" +
+                    resultSet.getString(1) + ", " +
+                    resultSet.getString(2) + ", " +
+                    Integer.toString(resultSet.getInt(3)*100) + "%}";
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return result;
+    }
+
+    // this is not a good place to put the policy change function, but due to running out of time I won't
+    // be making the design more object oriented, there's not much need for that for the presentation.
+    public void changePricingPolicy(String policyName, String newValue) {
+        String queryString = "" +
+                "UPDATE pricing_rules " +
+                "SET value = '" + newValue + "' " +
+                "WHERE name = '" + policyName.toLowerCase() + "'";
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "glushchenko", "glushDatabase");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(queryString);
+
+            resultSet.next();
+
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }
 // insert code here to query matt's database to check inventory.
 // inventory table currently empty, i'll uncomment dis section whenever its populated.
