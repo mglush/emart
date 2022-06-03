@@ -189,4 +189,34 @@ public class ProductService {
 
         return products;
     }
+
+    public Product changeProductPrice(String stockNumber, String newPrice) {
+        Product product = new Product();
+        String queryString = "" +
+                "UPDATE products " +
+                "SET price = '" + newPrice + "' " +
+                "WHERE id = '" + stockNumber + "'";
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "glushchenko", "glushDatabase");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(queryString);
+
+            resultSet.next();
+
+            product.setId(resultSet.getString(1));
+            product.setModelNumber(resultSet.getString(2));
+            product.setCategoryName(resultSet.getString(3));
+            product.setWarranty(resultSet.getBigDecimal(4));
+            product.setPrice(resultSet.getBigDecimal(5));
+
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return product;
+    }
+
 }

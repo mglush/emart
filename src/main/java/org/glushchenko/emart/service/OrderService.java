@@ -475,6 +475,55 @@ public class OrderService {
 
         return result;
     }
+
+    // this is not a good place to put the policy change function, but due to running out of time I won't
+    // be making the design more object oriented, there's not much need for that for the presentation.
+    // ideally policy would have its own class and a policy service, or manager service, or somethn like that.
+    public String getPricingPolicyByName(String policyName) {
+        String result = "";
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "glushchenko", "glushDatabase");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("" +
+                    "SELECT id, name, value " +
+                    "FROM pricing_rules " +
+                    "WHERE name = '" + policyName + "'");
+
+            resultSet.next();
+            result = "{" +
+                    resultSet.getString(1) + ", " +
+                    resultSet.getString(2) + ", " +
+                    Integer.toString(resultSet.getInt(3)*100) + "%}";
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return result;
+    }
+
+    // this is not a good place to put the policy change function, but due to running out of time I won't
+    // be making the design more object oriented, there's not much need for that for the presentation.
+    public void changePricingPolicy(String policyName, String newValue) {
+        String queryString = "" +
+                "UPDATE pricing_rules " +
+                "SET value = '" + newValue + "' " +
+                "WHERE name = '" + policyName.toLowerCase() + "'";
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@cs174a.cs.ucsb.edu:1521/xepdb1", "glushchenko", "glushDatabase");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(queryString);
+
+            resultSet.next();
+
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }
 // insert code here to query matt's database to check inventory.
 // inventory table currently empty, i'll uncomment dis section whenever its populated.

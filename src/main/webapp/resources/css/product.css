@@ -29,7 +29,10 @@ body {
 
 .otherWebsiteFeaturesButton {
     position:absolute;
-    top: 0%;
+    border-size:thin;
+    border-color:black;
+    border-radius: 20px;
+    top: 3%;
     left: 95%;
 }
 

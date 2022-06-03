@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./resources/css/product.css">
     <script>
     function goBack() {
-        window.history.go(-1)
+        window.history.back()
     }
     </script>
 </head>
@@ -51,10 +51,10 @@ out.println(customerMostPurchase + "<br>");
 %>
 
     <form method="post" onclick=goBack()>
-        <button class="goBackButton" type="submit">Go home</button>
+        <button class="goBackButton" type="submit">Go Back</button>
     </form>
-    <form method="post" action="/emart/home.jsp">
-        <button class="otherWebsiteFeaturesButton" type="submit">Go home</button>
+    <form method="post" action="/emart/manager.html">
+        <button class="otherWebsiteFeaturesButton" type="submit">Manager Home</button>
     </form>
 
 </body>

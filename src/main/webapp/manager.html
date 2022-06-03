@@ -15,24 +15,30 @@
         <input type="submit" class="managerButton" id="managerButton1" value="Print monthly statistics" />
     </form>
 
-    <form method="post" action="/emart/ChangeCustomerStatus">
-        <input type="submit" class="managerButton" id="managerButton2" value="Change customer status" />
-    </form>
-
     <form method="post" action="/emart/SendOrderToManufacturer">
         <input type="submit" class="managerButton" id="managerButton3" value="Send order to manufacturer" />
-    </form>
-
-    <form method="post" action="/emart/ChangeItemPrice">
-        <input type="submit" class="managerButton" id="managerButton4" value="Change price of an item" />
     </form>
 
     <form method="post" action="/emart/DeleteOrders">
         <input type="submit" class="managerButton" id="managerButton5" value="Delete unnecessary orders" />
     </form>
 
-    <form method="post" action="/emart/ChangePolicy">
-        <input type="submit" class="managerButton" id="managerButton6" value="Adjust pricing policy" />
+    <form method="post" action="/emart/ChangeCustomerStatus">
+        <input type="submit" class="managerButton" id="managerButton2" value="Change customer status" />
+        <input type="text" class="managerButton" id="managerInput1" placeholder="Enter customerID!" name="changeThisCustomer" size="21" maxlength="100">
+        <input type="text" class="managerButton" id="managerInput2" placeholder="Enter their new status!" name="changeToThisStatus" size="21" maxlength="100">
+    </form>
+
+    <form method="post" action="/emart/ChangeProductPrice">
+        <input type="submit" class="managerButton" id="managerButton4" value="Change product price" />
+        <input type="text" class="managerButton" id="managerInput3" placeholder="Enter productID!" name="changeThisProduct" size="21" maxlength="100">
+        <input type="text" class="managerButton" id="managerInput4" placeholder="Enter the new price!" name="changeToThisPrice" size="21" maxlength="100">
+    </form>
+
+    <form method="post" action="/emart/ChangePricingPolicy">
+        <input type="submit" class="managerButton" id="managerButton6" value="Change pricing policy" />
+        <input type="text" class="managerButton" id="managerInput5" placeholder="Enter policy name!" name="changeThisPolicy" size="21" maxlength="100">
+        <input type="text" class="managerButton" id="managerInput6" placeholder="Enter new policy value!" name="changeToThisValue" size="21" maxlength="100">
     </form>
 </div>
 </body>
