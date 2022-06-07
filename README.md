@@ -1,5 +1,5 @@
 # SQL Database Design of an Online Store.
-#### By Michael Glushchenko, partnered with Matthew Aragaw, for UCSB CS174A Spring 2022.
+#### By Michael Glushchenko, partnered with Matthew Aragaw, for UCSB CS174A Spring 2022 (Database Management Systems).
 
 Oracle Database implementation of an online store/warehouse system. The project provides separate interfaces for customers and managers to interact with the eMart database. At key points in the interactions, Matthew's eDepot database is queried for various information. I worked on the eMart database, as well as the interfaces for customers and managers to interact with the store.<br />
 
