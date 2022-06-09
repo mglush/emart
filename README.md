@@ -12,7 +12,7 @@ Oracle Database implementation of an online store/warehouse system. The project 
 
 ## How to Run
 ~~~
-git clone https://github.com/mglush/emart     # clone repository.
+git clone git@github.com:mglush/emart.git     # clone repository.
 cd emart                                      # enter repository folder.
 mvn clean && mvn tomcat7:run                  # run the store on localhost
 ~~~
