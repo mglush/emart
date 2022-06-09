@@ -4,6 +4,11 @@
 Oracle Database implementation of an online store/warehouse system. The project provides separate interfaces for customers and managers to interact with the eMart database. At key points in the interactions, Matthew's eDepot database is queried for various information. I worked on the eMart database, as well as the interfaces for customers and managers to interact with the store.
 
 ## Table of Contents.
+* [How To Run](https://github.com/mglush/emart/blob/main/README.md#how-to-run)
+* [Customer Interface Functionality](https://github.com/mglush/emart/blob/main/README.md#customer-interface-functionality)
+* [Manager Interface Functionality](https://github.com/mglush/emart/blob/main/README.md#manager-interface-functionality)
+* [eMart Database Functionality](https://github.com/mglush/emart/blob/main/README.md#emart-database-functionality)
+* [Technologies Used](https://github.com/mglush/emart/blob/main/README.md#technologies-used)
 
 ## How to Run
 ~~~
@@ -13,7 +18,7 @@ mvn clean && mvn tomcat7:run                  # run the store on localhost
 ~~~
 You can then access the website login page at http://localhost:8080/emart or http://localhost:8080/emart/index.html
 
-## Functionality of the customer interface
+## Customer Interface Functionality
   - log in with credentials.
   - create an account if user not yet a customer.
   - search through the product catalog by category by any criteria.
@@ -22,15 +27,15 @@ You can then access the website login page at http://localhost:8080/emart or htt
   - display the previous order for the customer.
   - re-run a previous order for a given customer.
 
-## Functionality of the manager interface
+## Manager Interface Functionality
   - log in with credentials.
   - print monthly summary of sales statements.
-  - adjust customer status (bypassing company policy).
-  - send an order to a manufacturer (bypassing company policy).
+  - adjust customer status (bypassing company policy) *(not yet implemented)*.
+  - send an order to a manufacturer (bypassing company policy) *(not yet implemented)*.
   - change the price of an item (bypassing company policy).
   - delete all sales transactions that are no longer needed for computation of customer status.
 
-## Functionality of the eMart database
+## eMart Database Functionality
   - automatically recomputes customer status according to their order history.
   - automatically sends a replenishment request to a manufacturer when there are 3 low-inventory items in the store made by that manufacturer.
   - allows for the change of company policy regarding how much discount to give to customers of certain status.
